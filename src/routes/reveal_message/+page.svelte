@@ -20,11 +20,11 @@
   </div>
   <h2 class="text-3xl mt-4 dark:text-white font-mono self-center">Reveal message hidden in a deck of cards</h2>
   <MessageToDecodeTextArea bind:text={text} />
-  <PokerCardsDeck cards={deck} />
+  <PokerCardsDeck clickable={true} cards={deck} />
   {#if showDecryptButton}
     <button id="copy-the-deck-btn" class="
     py-3 px-5 text-2xl font-mono text-white
-    bg-accent hover:opacity-90
+  bg-accent hover:opacity-90
   dark:border-gray-400 dark:bg-slate-600 dark:text-gray-100 mt-8 self-center
     hover:cursor-pointer hover:dark:bg-slate-500 transition-colors"
     >

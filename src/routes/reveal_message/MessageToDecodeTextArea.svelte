@@ -1,4 +1,7 @@
 <script lang="ts">
+    import { CardsUtils } from "$lib/shared/CardsUtils";
+    import { error } from "@sveltejs/kit";
+
   let {
     text = $bindable()
   }: {
@@ -7,10 +10,18 @@
 
   let totalCards = 52
 
-  let notAllowedSymbolsUsed = $derived.by(() => {
-    return ! /^[ AKQJ0-9♦️♣️♥️♠️]*$/.test(text)
+  let errorMessage = $derived.by(() => {
+    const result = CardsUtils.validateDeck(text)
+    if (!result.success) {
+      return result.reason
+    }
+    if (CardsUtils.countCardsInAText(text) >= totalCards) {
+      return `Your message contains more then ${totalCards} cards.`
+    }
+    
+    return undefined
   })
-  let isError = $derived(text.length >= totalCards || notAllowedSymbolsUsed)
+  let isError = $derived(text.length >= totalCards || errorMessage)
   
   let cardsLeft = $derived.by(() => {
     return Math.max(0, totalCards - text.length)
@@ -30,9 +41,10 @@
                     {isError
                       ? 'border-red-500 focus:border focus:border-red-500 focus:ring-red-500' 
                       : 'border-gray-200 focus:border-blue-500 focus:ring-blue-500'}
-                    rounded-2xl text-lg  disabled:opacity-50 disabled:pointer-events-none
-                    dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-        rows=4 placeholder="Say hi..." aria-describedby="hs-validation-name-error-helper"
+                    rounded-full text-2xl font-mono disabled:opacity-50 disabled:pointer-events-none
+                    text-center
+                  dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-100 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+        rows=4 placeholder="[paste here]" aria-describedby="hs-validation-name-error-helper"
     >
     </textarea>
     <div class="absolute top-0 end-0 flex items-center pointer-events-none p-3">
@@ -45,13 +57,9 @@
       {/if}
     </div>
   </div>
-  {#if isError}
+  {#if errorMessage}
     <p class="motion-preset-fade motion-duration-500 text-sm text-red-600 mt-2" id="hs-validation-name-error-helper">
-      {#if text.length >= totalCards}
-        Your message is over {totalCards} long.
-      {:else if notAllowedSymbolsUsed}
-        Can't use forbidden symbols.
-      {/if}
+      {errorMessage}
     </p>
   {/if}
 </div>

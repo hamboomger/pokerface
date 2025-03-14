@@ -1,13 +1,18 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-  import clubsSuit from '$lib/components/clubs_suit.png'
-  import diamondsSuit from '$lib/components/diamonds_suit.png'
-  import heartsSuit from '$lib/components/hearts_suit.png'
-  import spadesSuit from '$lib/components/spades_suit.png'
 
-  const props: {
-    cards: string[]
+  const {
+    cards,
+    highlightedCardsIndexes = [],
+    clickable = false
+  }: {
+    cards: string[],
+    clickable?: boolean,
+    highlightedCardsIndexes?: number[]
   } = $props()
+  
+  function shouldHighlight(cardIndex: number) {
+    return highlightedCardsIndexes.includes(cardIndex)
+  }
 </script>
 
 <style>
@@ -21,7 +26,7 @@
 </style>
 
 <div class="cards-grid mt-8">
-  {#each props.cards as card, cardIndex(card)}
+  {#each cards as card, cardIndex(card)}
     {@const suit = card[1]}
     {@const rank = card[0]}
     <div class="transition duration-100 motion-preset-shake {cardIndex % 2 == 0 ? 'motion-duration-500' : 'motion-duration-700'}
@@ -29,6 +34,8 @@
     border-4 border-thirdly dark:border-thirdly-dark
   bg-secondary dark:bg-secondary-dark flex items-center justify-center
     hover:scale-150 hover:cursor-default hover:z-10 text-lg
+    {clickable ? 'hover:cursor-pointer' : ''}
+    {shouldHighlight(cardIndex) ? '' : ''}
     ">
       <span class="{['C', 'S'].includes(suit) ? 'dark:text-slate-700' : 'dark:text-red-700'}
                    font-bold text-lg mr-1">

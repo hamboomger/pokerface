@@ -16,25 +16,39 @@ class _CardsUtils {
     ]
   }
   isValidCard(text: string): boolean {
-    if (text.length !== 2) {
+    if (this.visibleLength(text) !== 2) {
+      return false
+    }
+    
+    const rank = text[0]
+    const suit = text[1]
+
+    // Check if rank is valid
+    if (!rank.match(/^[AKQJT2-9]$/)) {
       return false
     }
 
-    return text.match(/^[ATJQK2-9]{1}[CDHS♦️♣️♥️♠️]{1}$/) !== null
+    // Check if suit is valid - either ASCII or emoji
+    if (!suit.match(/^[HSCD]$/) && !suit.match(/[♠️♥️♣️♦️]/u)) {
+      return false
+    }
+
+    return true
   }
   suitEmojiToAsci(suitEmoji: string): string {
-    switch (suitEmoji) {
-      case '♦️':
-        return 'D'
-      case '♣️':
-        return 'C'
-      case '♥️':
-        return 'H'
-      case '♠️':
-        return 'S'
-      default:
-        throw Error(`Invalid suit: ${suitEmoji}`)
+    if (suitEmoji.match(/[♠️]/u)) {
+      return 'S'
     }
+    if (suitEmoji.match(/[♦️]/u)) {
+      return 'D'
+    }
+    if (suitEmoji.match(/[♥️]/u)) {
+      return 'H'
+    }
+    if (suitEmoji.match(/[♣️]/u)) {
+      return 'C'
+    }
+    throw Error(`Invalid suit: ${suitEmoji}`)
   }
   suitAsciToEmoji(suitInAsci: string): string {
     switch (suitInAsci) {
@@ -65,12 +79,24 @@ class _CardsUtils {
     }
   }
   validateDeck(text: string): SuccessfulValidation | FailedValidation {
+    if (text.trim().length === 0) {
+      return { success: true }
+    }
+
     const cardsChecked: string[] = []
-    for (const cardString of text.split(/\s+/)) {
+    
+    let cardsStrings = text.trim().split(/\s+/)
+    // skip last element if it's only one character - 
+    //    user is in the process of writing
+    if (cardsStrings.at(-1)?.length === 1) {
+      cardsStrings = cardsStrings.slice(0, -1)
+    }
+
+    for (const cardString of cardsStrings) {
       if (!this.isValidCard(cardString)) {
         return {
           success: false,
-          reason: `Invalid input card after splitting by blank space: ${cardString}`
+          reason: `Invalid card: ${cardString}`
         }
       }
       
@@ -95,6 +121,9 @@ class _CardsUtils {
     }
     const cardsText = text.split(/\s+/)
     return cardsText.length
+  }
+  private visibleLength(str: string): number {
+    return [...new Intl.Segmenter().segment(str)].length
   }
 }
 
