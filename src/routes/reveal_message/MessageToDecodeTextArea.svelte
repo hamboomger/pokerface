@@ -1,14 +1,18 @@
 <script lang="ts">
     import { CardsUtils } from "$lib/shared/CardsUtils";
     import { error } from "@sveltejs/kit";
+    import ClipboardIcon from './clipboard_icon.svg';
 
   let {
-    text = $bindable()
+    text = $bindable(),
+    pasteButton = false
   }: {
     text: string
+    pasteButton?: boolean
   } = $props()
 
   let totalCards = 52
+  let isPasteBtnHovered = $state(false)
 
   let errorMessage = $derived.by(() => {
     const result = CardsUtils.validateDeck(text)
@@ -26,6 +30,16 @@
   let cardsLeft = $derived.by(() => {
     return Math.max(0, totalCards - text.length)
   })
+
+  function onPasteBtnEnter() {
+    console.log('onPasteBtnEnter')
+    isPasteBtnHovered = true
+  }
+
+  function onPasteBtnLeave() {
+    console.log('onPasteBtnLeave')
+    isPasteBtnHovered = false
+  }
 </script>
 
 <div class="w-full mt-8">
@@ -34,7 +48,7 @@
       {cardsLeft} cards left. 
     </span>
   </div>
-  <div class="relative">
+  <div class="relative flex">
     <textarea id="hs-validation-name-error" 
               bind:value={text}
               class="border py-3 px-4 block w-full text-2xl h-16 drop-shadow-xl
@@ -47,6 +61,18 @@
         rows=4 placeholder="[paste here]" aria-describedby="hs-validation-name-error-helper"
     >
     </textarea>
+    {#if pasteButton}
+      <button id="paste-button" 
+              class="px-6 py-2 
+                     flex items-center pointer-events-none p-3
+                     z-10
+                     hover:cursor-pointer font-mono bg-accent-dark text-2xl"
+                     onmouseenter={() => onPasteBtnEnter()}
+                     onmouseleave={() => onPasteBtnLeave()}>
+        <img src={ClipboardIcon} class="w-6 h-6" alt="Clipboard icon" />
+        <p class="w-0 overflow-hidden">clipboard</p>
+      </button>
+    {/if}
     <div class="absolute top-0 end-0 flex items-center pointer-events-none p-3">
       {#if isError}
         <svg class="shrink-0 size-4 text-red-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

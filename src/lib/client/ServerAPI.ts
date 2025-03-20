@@ -16,6 +16,21 @@ class _ServerAPI {
     const responseBody = await res.json()
     return responseBody.cards
   }
+  async decode(cards: string[]): Promise<string> {
+    const res = await fetch('/api/decode', {
+      method: 'POST',
+      body: JSON.stringify({
+        cards
+      })
+    })
+
+    if (res.status !== 200) {
+      console.error(res.status, res.text)
+    }
+    
+    const resBody = await res.json()
+    return resBody.message
+  }
 }
 
 export const ServerAPI = new _ServerAPI()
