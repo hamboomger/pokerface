@@ -66,7 +66,7 @@ class _CardsUtils {
   }
   convertCardIntoAsciFormat(card: string): string {
     if (!this.isValidCard(card)) {
-      throw Error('Passed card is not a valid card')
+      throw Error(`Invalid card: ${card}`)
     }
     
     const rank = card[0]
@@ -77,6 +77,10 @@ class _CardsUtils {
     } else {
       return rank + this.suitEmojiToAsci(suit)
     }
+  }
+  normalizeDeck(deckStr: string): string[] {
+    const deck = deckStr.replace(/\s+/g, ' ').split(' ')
+    return deck.map((card) => this.convertCardIntoAsciFormat(card))
   }
   validateDeck(text: string): SuccessfulValidation | FailedValidation {
     if (text.trim().length === 0) {

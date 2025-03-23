@@ -7,7 +7,7 @@
     isValidationError: boolean
   } = $props()
 
-  let maxCharacters = 42
+  let maxCharacters = 37
 
   let notAllowedSymbolsUsed = $derived.by(() => {
     return ! /^[,.\/ a-zA-Z0-9:]*$/.test(text)

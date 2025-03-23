@@ -3,6 +3,7 @@
     import _ from 'lodash'
     import { ServerAPI } from "$lib/client/ServerAPI";
     import PokerCardsDeck from "./PokerCardsDeck.svelte";
+    import { fly } from 'svelte/transition';
     import { ClientUtils } from "$lib/client/ClientUtils";
     import jokerHatImg from '$lib/components/joker_hat.png?enhanced'
 
@@ -81,8 +82,8 @@
 </script>
 
 <style>
-  #copy-the-deck-btn {
-    animation: fade-in-delayed 0.7s;
+  #copy-the-deck-btn.m-visible {
+    animation: fade-in-delayed 0.4s;
   }
   @keyframes fade-in-delayed {
     0%   {opacity: 0; }
@@ -99,14 +100,15 @@
   <h2 class="text-3xl dark:text-slate-200 font-mono self-center">Hide message in a deck of cards</h2>
   <MessageToIncodeTextField bind:isValidationError={isValidationError} bind:text={text} />
   {#if deck.length > 0}
-    <PokerCardsDeck cards={deck} />
+    <PokerCardsDeck bind:cards={deck} />
   {/if}
-  {#if showCopyDeckBtn}
     <button id="copy-the-deck-btn" class="
     py-3 px-5 text-2xl font-mono text-white
     bg-accent hover:opacity-90
   dark:border-gray-400 dark:bg-slate-600 dark:text-gray-100 mt-8 self-center
-    hover:cursor-pointer hover:dark:bg-slate-500 transition-colors"
+    hover:cursor-pointer hover:dark:bg-slate-500 transition-all min-h-0 overflow-hidden
+    {showCopyDeckBtn ? 'm-visible min-h-6 h-fit' : 'h-0 !p-0'}
+    "
     onclick={() => copyDeckToClipboard()}
     >
     {#if showDeckCopiedMessage}
@@ -115,5 +117,4 @@
       copy the deck
     {/if}
   </button>
-  {/if}
 </div>

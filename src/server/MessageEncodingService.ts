@@ -6,7 +6,7 @@ class _MessageEncodingService {
     'AS', '2S', '3S', '4S', '5S', '6S', '7S', '8S', '9S', 'TS', 'JS', 'QS', 'KS'
   ]
   constructor(
-    private alphabet = ' ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,/:'
+    private alphabet = ' ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyZ0123456789.,/:'
   ) {}
   private get alphabetLength(): bigint {
     return BigInt(this.alphabet.length)
@@ -14,10 +14,19 @@ class _MessageEncodingService {
   encode(message: string): string[] {
     const messageNumber = this.customBaseToDecimal(message);
     const permutation = this.numberToPermutation(messageNumber);
-    return this.mixUpCards(permutation, 8)
+
+    let mixed = this.mixUpCards(permutation, 4)
+    mixed = this.mixUpCards(mixed, 6)
+    mixed = this.mixUpCards(mixed, 10)
+    mixed = this.mixUpCards(mixed, 13)
+    return mixed
   }
   decode(deckPermutation: string[]): string {
-    const unmixed = this.mixUpCards(deckPermutation, 8)
+    let unmixed = this.mixUpCards(deckPermutation, 4)
+    unmixed = this.mixUpCards(unmixed, 6)
+    unmixed = this.mixUpCards(unmixed, 10)
+    unmixed = this.mixUpCards(unmixed, 13)
+
     const messageNumber = this.permutationToNumber(unmixed);
     return this.decimalToCustomBase(messageNumber);
   }

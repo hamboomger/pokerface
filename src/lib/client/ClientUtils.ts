@@ -20,6 +20,11 @@ class _ClientUtils {
       return rank + getEmojiSuit(suit)
     })
   }
+  async sleep(ms: number): Promise<void> {
+    return new Promise((resolve) => {
+      setTimeout(() => resolve(), ms)
+    })
+  }
 }
 
 export const ClientUtils = new _ClientUtils()
