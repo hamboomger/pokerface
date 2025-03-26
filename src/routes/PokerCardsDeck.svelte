@@ -5,11 +5,13 @@
   let {
     cards = $bindable(),
     clickable = false,
-    currentOrderIsNotStandard = $bindable()
+    currentOrderIsNotStandard = $bindable(),
+    onClick = () => undefined
   }: {
     cards: string[],
     clickable?: boolean,
-    currentOrderIsNotStandard?: boolean
+    currentOrderIsNotStandard?: boolean,
+    onClick?: (card: string) => void
   } = $props()
   
   let customOrderedCards = $state<Array<{card: string, originalPosition: number, currentPosition: number}>>([])
@@ -41,6 +43,8 @@
   }
 
   function onCardClick(cardIndex: number) {
+    onClick(cards[cardIndex])
+
     currentOrderIsNotStandard = true
     if (!partOfCustomOrder(cardIndex)) {
       const firstEmptyPosition = getFirstEmptyPosition()!
@@ -93,11 +97,13 @@
 <div class="cards-grid mt-8">
   {#each cards as card, cardIndex(card)}
     {#key cardsFlipPosition[cardIndex].flipped}
-      <CardItem card={card} cardIndex={cardIndex}
-          shouldHighlight={shouldHighlight} 
-          clickable={clickable}
-          onCardClick={onCardClick}
-          flipped={cardFlipped(cardIndex)} />
+      {#key shouldHighlight(cardIndex)}
+        <CardItem card={card} cardIndex={cardIndex}
+            shouldHighlight={shouldHighlight} 
+            clickable={clickable}
+            onCardClick={onCardClick}
+            flipped={cardFlipped(cardIndex)} />
+      {/key}
     {/key}
   {/each}
 </div>

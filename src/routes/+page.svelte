@@ -93,11 +93,11 @@
 </style>
 
 <div class="mx-auto w-full pt-12 flex flex-col pb-12">
-  <div class="self-center sm:w-72 motion-preset-seesaw">
+  <div class="self-center w-32 sm:w-72 motion-preset-seesaw">
     <enhanced:img src={jokerHatImg} alt="Joker hat" />
   </div>
 
-  <h2 class="text-3xl dark:text-slate-200 font-mono self-center">Hide message in a deck of cards</h2>
+  <h2 class="text-xl sm:text-3xl dark:text-slate-200 font-mono self-center">Hide message in a deck of cards</h2>
   <MessageToIncodeTextField bind:isValidationError={isValidationError} bind:text={text} />
   {#if deck.length > 0}
     <PokerCardsDeck bind:cards={deck} />

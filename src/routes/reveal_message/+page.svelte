@@ -110,4 +110,7 @@
   <PasteFromClipboardButton onclick={onPasteFromClipboard} />
   <h5 class="text-lg mt-8 dark:text-white font-mono self-center">... or click on the cards in the right order below:</h5>
   <PokerCardsDeck clickable={true} cards={deck} bind:currentOrderIsNotStandard={currentOrderIsNotStandard} />
+  {#if showDecryptButton}
+    <button>Decrypt</button>
+  {/if}
 </div>

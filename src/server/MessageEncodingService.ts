@@ -13,6 +13,9 @@ class _MessageEncodingService {
   }
   encode(message: string): string[] {
     const messageNumber = this.customBaseToDecimal(message);
+
+    console.log(`XXX permutation number: ${messageNumber}`)
+
     const permutation = this.numberToPermutation(messageNumber);
 
     let mixed = this.mixUpCards(permutation, 4)
@@ -22,6 +25,7 @@ class _MessageEncodingService {
     return mixed
   }
   decode(deckPermutation: string[]): string {
+    console.log(`XXX permutation number: ${this.permutationToNumber(deckPermutation)}`)
     let unmixed = this.mixUpCards(deckPermutation, 4)
     unmixed = this.mixUpCards(unmixed, 6)
     unmixed = this.mixUpCards(unmixed, 10)

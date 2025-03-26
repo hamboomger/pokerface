@@ -23,11 +23,11 @@
 </script>
 
 <div class="w-full mt-8">
-  <div class="flex justify-between items-center mb-2">
-    <span class="block text-md text-gray-700 dark:text-slate-300">
+  <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-2">
+    <span class="block text-sm sm:text-md text-gray-700 dark:text-slate-300">
       {charactersLeft} characters left. 
     </span>
-    <span class="dark:text-slate-300">
+    <span class="dark:text-slate-300 text-sm sm:text-md">
       Allowed characters: <code>a-z0-9,.:/[space]</code>
     </span>
   </div>

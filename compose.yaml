@@ -1,0 +1,16 @@
+services:
+  web:
+    build: .
+    environment:
+      PORT: 3000
+      ORIGIN: http://localhost:3000
+    command: pnpm run dev
+    ports:
+      - '3000:3000'
+    develop:
+      watch:
+        - action: sync+restart
+          path: .
+          target: /app
+          ignore:
+            - node_modules/
