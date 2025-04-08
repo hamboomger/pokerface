@@ -1,20 +1,47 @@
 <script lang="ts">
-    import { onMount } from "svelte";
+    const {
+      card, cardIndex, shouldHighlight, clickable, onCardClick, flipped
+    }: {
+      card: string,
+      cardIndex: number,
+      shouldHighlight: (cardIndex: number) => boolean,
+      clickable?: boolean,
+      onCardClick: (cardIndex: number) => void,
+      flipped: boolean
+    } = $props()
 
-  const {
-    card, cardIndex, shouldHighlight, clickable, onCardClick, flipped
-  }: {
-    card: string,
-    cardIndex: number,
-    shouldHighlight: (cardIndex: number) => boolean,
-    clickable?: boolean,
-    onCardClick: (cardIndex: number) => void,
-    flipped: boolean
-  } = $props()
+    $effect(() => {
+      console.log(`Should highlight: ${shouldHighlight(cardIndex)}`)
+    })
 
-  const rank = card[0]
-  const suit = card[1]
+    const rank = card[0]
+    const suit = card[1]
 </script>
+
+<button class="card-wrapper {clickable ? 'hover:cursor-pointer' : ''}"
+  onclick={() => clickable && onCardClick(cardIndex)}>
+    <div class="card-front 
+          {flipped ? 'm-visible' : 'm-hidden'} 
+          {shouldHighlight(cardIndex) && "!border-accent !dark:border-accent"}
+          ">
+        <div class="{['C', 'S'].includes(suit) ? 'dark:text-slate-700' : 'dark:text-red-700'}
+                    font-bold text-lg">
+          {rank}
+        </div>
+        <div class="text-md">
+        {#if suit == 'D'}
+          ♦️
+        {:else if suit === 'C'}
+          ♣️
+        {:else if suit === 'H'}
+          ♥️
+        {:else if suit === 'S'}
+        ♠️
+        {/if}
+      </div>
+    </div>
+    <div class="card-back m-light {flipped ? 'm-hidden' : 'm-visible'}"></div>
+</button>
 
 <style>
   @keyframes flip-and-hide {
@@ -89,7 +116,7 @@
   .card-back.m-visible {
     display: block;
   }
-  .card-back.m-style-1 {
+  .card-back.m-light {
     --s: 14px; /* control the size*/
     --c1: #d7eed9;
     --c2: #f24040;
@@ -104,27 +131,3 @@
     border: 4px solid #129f66;
 }
 </style>
-
-<button class="card-wrapper
-  {clickable ? 'hover:cursor-pointer' : ''}
-  {shouldHighlight(cardIndex) ? '!border-accent !dark:border-accent' : ''}"
-  onclick={() => clickable && onCardClick(cardIndex)}>
-    <div class="card-front {flipped ? 'm-visible' : 'm-hidden'}">
-        <div class="{['C', 'S'].includes(suit) ? 'dark:text-slate-700' : 'dark:text-red-700'}
-                    font-bold text-lg">
-          {rank}
-        </div>
-        <div class="text-sm">
-        {#if suit == 'D'}
-          ♦️
-        {:else if suit === 'C'}
-          ♣️
-        {:else if suit === 'H'}
-          ♥️
-        {:else if suit === 'S'}
-          ♠️
-        {/if}
-      </div>
-    </div>
-    <div class="card-back m-style-1 {flipped ? 'm-hidden' : 'm-visible'}"></div>
-</button>

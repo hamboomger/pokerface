@@ -2,10 +2,10 @@
     import MessageToIncodeTextField from "./MessageToIncodeTextField.svelte";
     import _ from 'lodash'
     import { ServerAPI } from "$lib/client/ServerAPI";
-    import PokerCardsDeck from "./PokerCardsDeck.svelte";
-    import { fly } from 'svelte/transition';
+    import PokerCardsDeck from "$lib/components/poker_cards/PokerCardsDeck.svelte";
     import { ClientUtils } from "$lib/client/ClientUtils";
     import jokerHatImg from '$lib/components/joker_hat.png?enhanced'
+    import MainButton from "$lib/components/MainButton.svelte";
 
     const originalOrder = [
       'AC', '2C', '3C', '4C', '5C', '6C', '7C', '8C', '9C', 'TC', 'JC', 'QC', 'KC',
@@ -93,7 +93,7 @@
 </style>
 
 <div class="mx-auto w-full pt-12 flex flex-col pb-12">
-  <div class="self-center w-32 sm:w-72 motion-preset-seesaw">
+  <div class="self-center w-32 sm:w-48 motion-preset-seesaw">
     <enhanced:img src={jokerHatImg} alt="Joker hat" />
   </div>
 
@@ -102,19 +102,15 @@
   {#if deck.length > 0}
     <PokerCardsDeck bind:cards={deck} />
   {/if}
-    <button id="copy-the-deck-btn" class="
-    py-3 px-5 text-2xl font-mono text-white
-    bg-accent hover:opacity-90
-  dark:border-gray-400 dark:bg-slate-600 dark:text-gray-100 mt-8 self-center
-    hover:cursor-pointer hover:dark:bg-slate-500 transition-all min-h-0 overflow-hidden
-    {showCopyDeckBtn ? 'm-visible min-h-6 h-fit' : 'h-0 !p-0'}
-    "
-    onclick={() => copyDeckToClipboard()}
-    >
-    {#if showDeckCopiedMessage}
-      deck copied!
-    {:else}
-      copy the deck
-    {/if}
-  </button>
+
+  <div class="overflow-hidden mx-auto pt-6
+    {showCopyDeckBtn ? 'm-visible min-h-6 h-fit' : 'h-0 !p-0'}">
+    <MainButton onClick={() => copyDeckToClipboard()}>
+      {#if showDeckCopiedMessage}
+        deck copied!
+      {:else}
+        copy the deck
+      {/if}
+    </MainButton>
+  </div>
 </div>

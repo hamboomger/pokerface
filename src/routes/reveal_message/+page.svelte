@@ -1,9 +1,11 @@
 <script lang="ts">
+    import ClipboardIcon from './clipboard_icon.svg';
     import { ClientUtils } from '$lib/client/ClientUtils';
     import { ServerAPI } from '$lib/client/ServerAPI';
     import jokerHat2Img from '$lib/components/joker_hat_2.png?enhanced'
+    import MainButton from '$lib/components/MainButton.svelte';
     import { CardsUtils } from '$lib/shared/CardsUtils';
-    import PokerCardsDeck from '../PokerCardsDeck.svelte';
+    import PokerCardsDeck from '../../lib/components/poker_cards/PokerCardsDeck.svelte';
     import PasteFromClipboardButton from './PasteFromClipboardButton.svelte';
     const originalDeck = CardsUtils.standardDeck
     let deck = $state([...originalDeck])
@@ -100,14 +102,17 @@
 </style>
 
 <div class="mx-auto w-full pt-12 flex flex-col pb-12">
-  <div class="self-center sm:w-60 motion-preset-seesaw motion-preset-stretch-sm motion-duration-2000">
+  <div class="self-center sm:w-40 motion-preset-seesaw motion-preset-stretch-sm motion-duration-2000">
     <enhanced:img src={jokerHat2Img} alt="Joker hat" />
   </div>
   <h2 class="text-3xl mt-8 mb-8 dark:text-white font-mono self-center whitespace-pre-wrap h-[2.3rem]
              {enableTypewriterCursor ? 'title-with-cursor' : ''}">
     {pageTitle}
   </h2>
-  <PasteFromClipboardButton onclick={onPasteFromClipboard} />
+  <MainButton onClick={onPasteFromClipboard}>
+    <img src={ClipboardIcon} class="w-6 h-6 mr-4" alt="Clipboard icon" />
+    Paste from clipboard
+  </MainButton>
   <h5 class="text-lg mt-8 dark:text-white font-mono self-center">... or click on the cards in the right order below:</h5>
   <PokerCardsDeck clickable={true} cards={deck} bind:currentOrderIsNotStandard={currentOrderIsNotStandard} />
   {#if showDecryptButton}
