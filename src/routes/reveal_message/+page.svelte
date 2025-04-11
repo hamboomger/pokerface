@@ -2,7 +2,7 @@
     import ClipboardIcon from './clipboard_icon.svg';
     import { ClientUtils } from '$lib/client/ClientUtils';
     import { ServerAPI } from '$lib/client/ServerAPI';
-    import jokerHat2Img from '$lib/components/hat_3.png?enhanced'
+    import jokerHat2Img from '$lib/components/images/hat_3.png?enhanced'
     import MainButton from '$lib/components/MainButton.svelte';
     import { CardsUtils } from '$lib/shared/CardsUtils';
     import PokerCardsDeck from '../../lib/components/poker_cards/PokerCardsDeck.svelte';

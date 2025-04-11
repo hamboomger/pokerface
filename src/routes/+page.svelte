@@ -4,7 +4,7 @@
     import { ServerAPI } from "$lib/client/ServerAPI";
     import PokerCardsDeck from "$lib/components/poker_cards/PokerCardsDeck.svelte";
     import { ClientUtils } from "$lib/client/ClientUtils";
-    import jokerHatImg from '$lib/components/joker_hat.png?enhanced'
+    import jokerHatImg from '$lib/components/images/joker_hat.png?enhanced'
     import MainButton from "$lib/components/MainButton.svelte";
 
     const originalOrder = [
