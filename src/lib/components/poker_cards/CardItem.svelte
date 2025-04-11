@@ -18,14 +18,15 @@
     const suit = card[1]
 </script>
 
-<button class="card-wrapper {clickable ? 'hover:cursor-pointer' : ''}"
+<button class="card-wrapper "
   onclick={() => clickable && onCardClick(cardIndex)}>
-    <div class="card-front flex items-center justify-center gap-1 absolute inset-0
-          dark:border-none
-          border-4 border-thirdly dark:border-thirdly-dark
-        bg-secondary dark:bg-secondary-dark 
+    <div class="card-front flex items-center justify-center gap-1 absolute inset-0 {clickable && 'hover:cursor-pointer'}
+          bg-secondary dark:bg-secondary-dark 
           {flipped ? 'm-visible' : 'm-hidden'} 
-          {shouldHighlight(cardIndex) && "!border-accent !dark:border-accent"}
+          {shouldHighlight(cardIndex) 
+            ? "border-4 border-accent dark:border-red-700"
+            : "border-4 border-thirdly dark:border-none"
+          }
           ">
         <div class="{['C', 'S'].includes(suit) ? 'dark:text-slate-700' : 'dark:text-red-700'}
                     font-bold text-lg">
@@ -43,7 +44,7 @@
         {/if}
       </div>
     </div>
-    <div class="card-back m-light {flipped ? 'm-hidden' : 'm-visible'}"></div>
+    <div class="card-back m-light border-4 border-green-400 dark:border-yellow-700 {flipped ? 'm-hidden' : 'm-visible'}"></div>
 </button>
 
 <style>
@@ -122,7 +123,5 @@
     conic-gradient(from 135deg,var(--_g)) calc(var(--s)/2) 0,
     var(--c2);
     background-size: var(--s) var(--s);
-
-    border: 4px solid #129f66;
 }
 </style>

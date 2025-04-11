@@ -15,25 +15,13 @@ module.exports = {
         'thirdly': '#FF9D23',
         'accent': '#F93827',
         'primary-font-color': '#374151',
-        'text-secondary': '#000000',
         // dark variants
-        'primary-dark': '#27374D',
-        'secondary-dark': '#EEEEEE',
+        'primary-dark': '#040507',
+        'secondary-dark': '#DDD',
         'thirdly-dark': '#393E46',
         'accent-dark': '#00ADB5',
-        'text-primary-dark': '#FFFFFF',
-        'text-secondary-dark': '#FFFFFF',
-        // 'primary-dark': '#4635B1',
-        // 'secondary-dark': '#B771E5',
-        // 'thirdly-dark': '#AEEA94',
-        // 'accent-dark': '#FFFBCA',
+        'primary-font-color-dark': '#DDD',
       },
-      // colors: {
-      //   'primary': '#B5C0D0',
-      //   'secondary': '#CCD3CA',
-      //   'thirdly': '#F5E8DD',
-      //   'accent': '#EED3D9'
-      // }
     },
   },
   plugins: [

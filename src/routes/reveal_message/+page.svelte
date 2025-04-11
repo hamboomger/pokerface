@@ -105,7 +105,7 @@
   <div class="self-center sm:w-52 motion-preset-seesaw motion-preset-stretch-sm motion-duration-2000">
     <enhanced:img src={jokerHat2Img} alt="Joker hat" />
   </div>
-  <h2 class="text-3xl mb-8 dark:text-white text-primary-font-color font-mono self-center whitespace-pre-wrap h-[2.3rem]
+  <h2 class="text-3xl mb-8 text-primary-font-color dark:text-primary-font-color-dark font-mono self-center whitespace-pre-wrap h-[2.3rem]
              {enableTypewriterCursor ? 'title-with-cursor' : ''}">
     {pageTitle}
   </h2>

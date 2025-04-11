@@ -1,9 +1,16 @@
 <script lang="ts">
+    import { onMount } from "svelte";
+
   let toggleOn = $state(false);
 
-  $effect(() => {
-    document.documentElement.classList.toggle('dark', toggleOn);
+  onMount(() => {
+    toggleOn = document.documentElement.classList.contains('dark');
   })
+
+  function toggleTheme() {
+    toggleOn = !toggleOn;
+    document.documentElement.classList.toggle('dark', toggleOn);
+  }
 </script>
 
 <svelte:head>
@@ -12,8 +19,8 @@
 
 <button
   class="theme-toggle {toggleOn ? 'theme-toggle--toggled' : ''} h-10 w-10 pt-2
-       text-secondary dark:text-white drop-shadow-md"
-  onclick={() => toggleOn = !toggleOn}
+       text-secondary dark:text-primary-font-color-dark drop-shadow-md"
+  onclick={toggleTheme}
   type="button"
   title="Toggle theme"
   aria-label="Toggle theme"

@@ -22,7 +22,7 @@
 
 <div class="w-full flex justify-between items-end py-1">
   {#if currentPage === 'reveal_message'}
-    <a href="/" class="font-mono underline text-xl text-primary-font-color dark:text-white">{'<-'} hide message</a>
+    <a href="/" class="font-mono underline text-xl text-primary-font-color dark:text-primary-font-color-dark">{'<-'} hide message</a>
     {#if !props.hideThemeToggle}
       <ThemeToggle />
     {/if}
@@ -30,6 +30,6 @@
     {#if !props.hideThemeToggle}
       <ThemeToggle />
     {/if}
-    <a href="/reveal_message" class="font-mono ml-auto text-xl underline text-primary-font-color dark:text-white">reveal hidden message -></a>
+    <a href="/reveal_message" class="font-mono ml-auto text-xl underline text-primary-font-color dark:text-primary-font-color-dark">reveal hidden message -></a>
   {/if}
 </div>

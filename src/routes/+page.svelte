@@ -87,7 +87,7 @@
     <enhanced:img src={jokerHatImg} alt="Joker hat" />
   </div>
 
-  <h2 class="text-xl text-primary-font-color mt-2 sm:text-3xl dark:text-primary-dark font-mono self-center">Hide message in a deck of cards</h2>
+  <h2 class="text-xl text-primary-font-color mt-2 sm:text-3xl dark:text-primary-font-color-dark font-mono self-center">Hide message in a deck of cards</h2>
   <MessageToIncodeTextField bind:isValidationError={isValidationError} bind:text={text} />
   {#if deck.length > 0}
     <PokerCardsDeck bind:cards={deck} />
