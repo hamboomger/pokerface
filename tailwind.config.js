@@ -3,6 +3,7 @@ module.exports = {
       './node_modules/preline/preline.js',
       './src/**/*.{html,js,svelte,ts}'
   ],
+  darkMode: 'selector',
   theme: {
     extend: {
       gridColumn: {
@@ -13,11 +14,15 @@ module.exports = {
         'secondary': '#FFD65A',
         'thirdly': '#FF9D23',
         'accent': '#F93827',
+        'primary-font-color': '#374151',
+        'text-secondary': '#000000',
         // dark variants
         'primary-dark': '#27374D',
         'secondary-dark': '#EEEEEE',
         'thirdly-dark': '#393E46',
         'accent-dark': '#00ADB5',
+        'text-primary-dark': '#FFFFFF',
+        'text-secondary-dark': '#FFFFFF',
         // 'primary-dark': '#4635B1',
         // 'secondary-dark': '#B771E5',
         // 'thirdly-dark': '#AEEA94',

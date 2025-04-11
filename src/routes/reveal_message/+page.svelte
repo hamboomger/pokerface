@@ -2,7 +2,7 @@
     import ClipboardIcon from './clipboard_icon.svg';
     import { ClientUtils } from '$lib/client/ClientUtils';
     import { ServerAPI } from '$lib/client/ServerAPI';
-    import jokerHat2Img from '$lib/components/joker_hat_2.png?enhanced'
+    import jokerHat2Img from '$lib/components/hat_3.png?enhanced'
     import MainButton from '$lib/components/MainButton.svelte';
     import { CardsUtils } from '$lib/shared/CardsUtils';
     import PokerCardsDeck from '../../lib/components/poker_cards/PokerCardsDeck.svelte';
@@ -102,10 +102,10 @@
 </style>
 
 <div class="mx-auto w-full pt-12 flex flex-col pb-12">
-  <div class="self-center sm:w-40 motion-preset-seesaw motion-preset-stretch-sm motion-duration-2000">
+  <div class="self-center sm:w-52 motion-preset-seesaw motion-preset-stretch-sm motion-duration-2000">
     <enhanced:img src={jokerHat2Img} alt="Joker hat" />
   </div>
-  <h2 class="text-3xl mt-8 mb-8 dark:text-white font-mono self-center whitespace-pre-wrap h-[2.3rem]
+  <h2 class="text-3xl mb-8 dark:text-white text-primary-font-color font-mono self-center whitespace-pre-wrap h-[2.3rem]
              {enableTypewriterCursor ? 'title-with-cursor' : ''}">
     {pageTitle}
   </h2>

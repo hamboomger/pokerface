@@ -20,7 +20,10 @@
 
 <button class="card-wrapper {clickable ? 'hover:cursor-pointer' : ''}"
   onclick={() => clickable && onCardClick(cardIndex)}>
-    <div class="card-front 
+    <div class="card-front flex items-center justify-center gap-1 absolute inset-0
+          dark:border-none
+          border-4 border-thirdly dark:border-thirdly-dark
+        bg-secondary dark:bg-secondary-dark 
           {flipped ? 'm-visible' : 'm-hidden'} 
           {shouldHighlight(cardIndex) && "!border-accent !dark:border-accent"}
           ">
@@ -87,14 +90,6 @@
   }
 
   /* CARD FRONT */
-  .card-front {
-    @apply flex items-center justify-center gap-1
-      dark:border-none
-      border-4 border-thirdly dark:border-thirdly-dark
-      bg-secondary dark:bg-secondary-dark ;
-    position: absolute;
-    inset: 0;
-  }
   .card-front.m-visible {
     animation: flip-and-show 400ms ease-in-out;
     transform: unset;

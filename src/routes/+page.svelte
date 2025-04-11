@@ -74,6 +74,7 @@
     $effect(() => {
       if (!text.length) {
         deck = originalOrder
+        showCopyDeckBtn = false
         return
       }
 
@@ -81,30 +82,19 @@
     })
 </script>
 
-<style>
-  #copy-the-deck-btn.m-visible {
-    animation: fade-in-delayed 0.4s;
-  }
-  @keyframes fade-in-delayed {
-    0%   {opacity: 0; }
-    80%  {opacity: 0; }
-    100% {opacity: 100; }
-  }
-</style>
-
 <div class="mx-auto w-full pt-12 flex flex-col pb-12">
   <div class="self-center w-32 sm:w-48 motion-preset-seesaw">
     <enhanced:img src={jokerHatImg} alt="Joker hat" />
   </div>
 
-  <h2 class="text-xl sm:text-3xl dark:text-slate-200 font-mono self-center">Hide message in a deck of cards</h2>
+  <h2 class="text-xl text-primary-font-color mt-2 sm:text-3xl dark:text-primary-dark font-mono self-center">Hide message in a deck of cards</h2>
   <MessageToIncodeTextField bind:isValidationError={isValidationError} bind:text={text} />
   {#if deck.length > 0}
     <PokerCardsDeck bind:cards={deck} />
   {/if}
 
-  <div class="overflow-hidden mx-auto pt-6
-    {showCopyDeckBtn ? 'm-visible min-h-6 h-fit' : 'h-0 !p-0'}">
+  <div class="overflow-hidden mx-auto pt-6 transition-all duration-1000
+    {showCopyDeckBtn ? 'max-h-24 h-fit opacity-100' : 'max-h-0 opacity-0 h-0 !p-0'}">
     <MainButton onClick={() => copyDeckToClipboard()}>
       {#if showDeckCopiedMessage}
         deck copied!
