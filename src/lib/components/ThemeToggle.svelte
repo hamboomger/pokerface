@@ -10,6 +10,9 @@
   function toggleTheme() {
     toggleOn = !toggleOn;
     document.documentElement.classList.toggle('dark', toggleOn);
+    window.dispatchEvent(
+      new CustomEvent('theme-changed', { detail: { mode: toggleOn ? 'dark' : 'light' } })
+    )
   }
 </script>
 

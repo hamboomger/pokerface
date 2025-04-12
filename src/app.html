@@ -8,10 +8,15 @@
 			if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
 				document.documentElement.classList.add('dark')
 			}
+
+			// window.dispatchEvent(
+			// 	new CustomEvent('theme-change', { }
+			// )
 			window.matchMedia('(prefers-color-scheme: dark)')
 						.addEventListener('change',({ matches }) => {
-				
-				console.log("CHANGED")
+				window.dispatchEvent(
+					new CustomEvent('theme-changed', { detail: { mode: matches ? 'dark' : 'light' } })
+				)
 				if (matches) {
 					document.documentElement.classList.add('dark')
 				} else {
