@@ -44,7 +44,7 @@
         {/if}
       </div>
     </div>
-    <div class="card-back m-light border-4 border-green-400 dark:border-yellow-700 {flipped ? 'm-hidden' : 'm-visible'}"></div>
+    <div class="card-back m-light border-4 border-red-500 dark:border-yellow-700 {flipped ? 'm-hidden' : 'm-visible'}"></div>
 </button>
 
 <style>

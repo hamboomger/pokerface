@@ -7,6 +7,7 @@
     import { CardsUtils } from '$lib/shared/CardsUtils';
     import PokerCardsDeck from '../../lib/components/poker_cards/PokerCardsDeck.svelte';
     import PasteFromClipboardButton from './PasteFromClipboardButton.svelte';
+    import SecondaryButton from '$lib/components/SecondaryButton.svelte';
     const originalDeck = CardsUtils.standardDeck
     let deck = $state([...originalDeck])
 
@@ -116,6 +117,6 @@
   <h5 class="text-lg mt-8 dark:text-white font-mono self-center">... or click on the cards in the right order below:</h5>
   <PokerCardsDeck clickable={true} cards={deck} bind:currentOrderIsNotStandard={currentOrderIsNotStandard} />
   {#if showDecryptButton}
-    <button>Decrypt</button>
+    <SecondaryButton onClick={decryptMessage}>Decrypt</SecondaryButton>
   {/if}
 </div>
