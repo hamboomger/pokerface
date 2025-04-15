@@ -11,7 +11,7 @@
 </script>
 
 <button id={id} 
-  class="px-6 py-2 self-center text-2xl
+  class="px-4 py-2 self-center text-2xl
         flex items-center transition-all
         bg-thirdly hover:bg-accent hover:scale-105
         hover:cursor-pointer font-mono 

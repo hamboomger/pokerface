@@ -16,7 +16,7 @@ module.exports = {
         'accent': '#F93827',
         'primary-font-color': '#374151',
         // dark variants
-        'primary-dark': '#040507',
+        'primary-dark': '#1D2537',
         'secondary-dark': '#DDD',
         'thirdly-dark': '#393E46',
         'accent-dark': '#00ADB5',

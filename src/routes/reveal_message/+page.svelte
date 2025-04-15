@@ -116,7 +116,9 @@
   </MainButton>
   <h5 class="text-lg mt-8 dark:text-white font-mono self-center">... or click on the cards in the right order below:</h5>
   <PokerCardsDeck clickable={true} cards={deck} bind:currentOrderIsNotStandard={currentOrderIsNotStandard} />
-  {#if showDecryptButton}
-    <SecondaryButton onClick={decryptMessage}>Decrypt</SecondaryButton>
+  {#if true}
+    <div class="mt-8 mx-auto">
+      <SecondaryButton onClick={decryptMessage}>Decrypt</SecondaryButton>
+    </div>
   {/if}
 </div>

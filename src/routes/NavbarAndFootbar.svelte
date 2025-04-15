@@ -20,7 +20,7 @@
 
 </svelte:head>
 
-<div class="w-full flex justify-between items-end py-1">
+<div class="w-full flex justify-between items-end py-2">
   {#if currentPage === 'reveal_message'}
     <a href="/" class="font-mono underline text-xl text-primary-font-color dark:text-primary-font-color-dark">{'<-'} hide message</a>
     {#if !props.hideThemeToggle}

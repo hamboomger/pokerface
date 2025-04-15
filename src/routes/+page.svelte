@@ -14,7 +14,7 @@
       'AS', '2S', '3S', '4S', '5S', '6S', '7S', '8S', '9S', 'TS', 'JS', 'QS', 'KS'
     ]
 
-    const DELAY_BEFORE_SCROLLING_TO_COPY_BTN = 1_000
+    const DELAY_BEFORE_SCROLLING_TO_COPY_BTN = 500
 
     let text = $state('')
     let isValidationError = $state(false)
@@ -58,10 +58,10 @@
           showCopyDeckBtn = true
           setTimeout(
             () => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }),
-            200
+            DELAY_BEFORE_SCROLLING_TO_COPY_BTN
           )
         }
-      }, DELAY_BEFORE_SCROLLING_TO_COPY_BTN)
+      }, 1_000)
     })
 
     const encodeMessageAndUpdateDeck = _.throttle((message: string) => {
