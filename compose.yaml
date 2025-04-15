@@ -1,6 +1,8 @@
 services:
   web:
-    build: .
+    build: 
+      context: .
+      target: builder
     environment:
       PORT: 3000
       ORIGIN: http://localhost:3000
