@@ -22,6 +22,5 @@ COPY --from=builder /app/node_modules/ /app/node_modules/
 COPY package.json .
 
 EXPOSE 3000
-ENV ORIGIN=http://localhost:3000
 
 CMD [ "node", "build" ]
